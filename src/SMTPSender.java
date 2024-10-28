@@ -30,6 +30,15 @@ public class SMTPSender {
             throw new Exception("HELO 실패했습니다:" + lineFromServer);
         }
 
+        System.out.println("MAIL FROM 명령을 전송합니다.");
+        outToServer.print("MAIL FROM:" + sender + '\n');
+        outToServer.flush();
+        String lineFromServer_2 = inFromServer.readLine();
+        System.out.println("응답:" + lineFromServer_2);
+        if(!lineFromServer_2.startsWith("250")) {
+            throw new Exception("MAIL FROM 실패했습니다:" + lineFromServer_2);
+        }
+
         System.out.println("RCPT 명령을 전송합니다.");
         outToServer.print("RCPT TO" + recipient + '\n');
         outToServer.flush();
