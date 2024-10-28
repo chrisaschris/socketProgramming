@@ -32,6 +32,7 @@ public class SMTPSender {
 
         System.out.println("RCPT 명령을 전송합니다.");
         outToServer.print("RCPT TO" + recipient + '\n');
+        outToServer.flush();
         line = inFromServer.readLine();
         System.out.println("응답:" + line);
         if(!line.startsWith("250")) {
